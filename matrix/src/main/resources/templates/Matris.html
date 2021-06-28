@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en
+" xmlns:th="http://www.thymeleaf.org"
+>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<style>
+  .square {
+    height: 60px;
+    width: 60px;
+    background-color: #444;
+    color: #fff;
+    font-size: 150%;
+    padding: 10px;
+    margin-left: 20px;
+    margin-top: 40px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .box{
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+  }
+
+</style>
+<body>
+<form  th:action="@{/getvalue}" th:object="${data}" method="get" style="padding: 70px; margin-top: 20px;margin-left: 20px;margin-right: 20px;margin-bottom: 10px;">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text" >Row</span>
+    </div>
+    <input th:field="${data.m}" id="first" type="text" class="form-control">
+    <div class="input-group-prepend">
+      <span class="input-group-text" >Column</span>
+    </div>
+    <input th:field="${data.n}" id="second" type="text" class="form-control">
+    <button type="submit">Generate</button>
+  </div>
+</form>
+
+<div th:if="${data!=null}">
+  <div id="matrixId"  th:each="i:${#numbers.sequence(1,data.m)}" class="row box">
+    <div th:each="j:${#numbers.sequence(1,data.n)}">
+      <div class="square " th:text="${#strings.randomAlphanumeric(1)}"></div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>
